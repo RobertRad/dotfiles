@@ -49,3 +49,8 @@ bindkey '^?' backward-delete-char
 
 autoload -U select-word-style
 select-word-style bash
+
+# CTRL+D for logout
+function func_logout { logout }
+zle -N logout_widget func_logout
+bindkey '^D' logout_widget
