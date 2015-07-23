@@ -1,0 +1,1 @@
+RPROMPT=%F{green}%(?..%?)%f
