@@ -37,15 +37,18 @@ setopt HIST_REDUCE_BLANKS
 #   like: git comm-[tab]
 setopt complete_aliases
 
-zle -N newtab
+bindkey -e
+bindkey  "^[[H"   beginning-of-line
+bindkey  "^[[F"   end-of-line
+bindkey  "^[[3~"  delete-char
 
-bindkey '^[^[[D' backward-word
-bindkey '^[^[[C' forward-word
-bindkey '^[[5D' beginning-of-line
-bindkey '^[[5C' end-of-line
-bindkey '^[[3~' delete-char
-bindkey '^[^N' newtab
-bindkey '^?' backward-delete-char
+# Alt + Left, Right
+bindkey "^[^[[D" backward-word
+bindkey "^[^[[C" forward-word
+
+# Ctrl + Left, Right
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;5C" forward-word
 
 autoload -U select-word-style
 select-word-style bash
