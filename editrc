@@ -2,10 +2,11 @@
 bind "^R" em-inc-search-prev
 
 # Alt + Left, Right to move the cursor to the previous/next word
-bind "[D" ed-prev-word
-bind "[C" em-next-word
+# Has the side effect, that left square brackets cannot be inserted anymore...
+#bind "[D" ed-prev-word
+#bind "[C" em-next-word
 # Alternative:
 # Ctrl + Left, Right to move the cursor to the previous/next word
-#bind "\e[1;5D" ed-prev-word
-#bind "\e[1;5C" em-next-word
+bind "\e[1;5D" ed-prev-word
+bind "\e[1;5C" em-next-word
 
