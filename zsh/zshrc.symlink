@@ -17,9 +17,6 @@ then
 	source $HOME/.localrc.before
 fi
 
-export NVM_DIR="$HOME/.nvm"
-#test -e "/usr/local/opt/nvm/nvm.sh" && source "/usr/local/opt/nvm/nvm.sh"
-
 # Source ZSH files
 typeset -U config_files
 config_files=($ZSH/**/*.zsh)
@@ -53,3 +50,5 @@ then
 fi
 
 unset config_files
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
