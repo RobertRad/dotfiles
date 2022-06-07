@@ -97,6 +97,17 @@ if [[ $MY_ZSH_PROFILE == "home" ]]; then
 	. "${HOME}/.dotfiles/profiles/home/.prompt"
 fi
 
+if [[ $MY_ZSH_PROFILE == "k8s-aws" ]]; then
+	. "${HOME}/.dotfiles/profiles/k8s-aws/.aliases"
+fi
+if [[ $MY_ZSH_PROFILE == "home" ]]; then
+	. "${HOME}/.dotfiles/profiles/home/.aliases"
+fi
+
+if [[ -f "${HOME}/.localrc" ]]; then
+	. "${HOME}/.localrc"
+fi
+
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
