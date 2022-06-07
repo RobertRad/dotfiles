@@ -84,7 +84,6 @@ fi
 if [[ $MY_ZSH_PROFILE == "home" ]]; then
 	. "${HOME}/.dotfiles/profiles/home/.plugins"
 fi
-echo "plugins: $plugins"
 
 
 source $ZSH/oh-my-zsh.sh
