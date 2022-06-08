@@ -80,7 +80,6 @@ HIST_STAMPS="yyyy-mm-dd"
 # Add wisely, as too many plugins slow down shell startup.
 
 
-
 function _source_from_profile() {
 	local FILE="${HOME}/.dotfiles/profiles/$MY_ZSH_PROFILE/$1"
 	if [[ -f "${FILE}" ]]; then
@@ -88,6 +87,12 @@ function _source_from_profile() {
 	fi
 }
 
+function _source_from_local() {
+	local FILE="${HOME}/.localzsh_$1"
+	if [[ -f "${FILE}" ]]; then
+		. "${FILE}"
+	fi
+}
 _source_from_profile '.plugins'
 
 source $ZSH/oh-my-zsh.sh
@@ -98,9 +103,10 @@ _source_from_profile '.prompt'
 _source_from_profile '.aliases'
 _source_from_profile '.env'
 
-if [[ -f "${HOME}/.localrc" ]]; then
-	. "${HOME}/.localrc"
-fi
+_source_from_local 'prompt'
+_source_from_local 'aliases'
+_source_from_local 'env'
+
 
 # User configuration
 
