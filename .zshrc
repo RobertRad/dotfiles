@@ -3,6 +3,7 @@
 # export MY_ZSH_PROFILE="k8s-aws"
 # . "${HOME}/.dotfiles/.zshrc"
 
+export MY_ZSH_PROFILE=${MY_ZSH_PROFILE//[^A-Za-z0-9_-]/_}
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -78,31 +79,24 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
-if [[ $MY_ZSH_PROFILE == "k8s-aws" ]]; then
-	. "${HOME}/.dotfiles/profiles/k8s-aws/.plugins"
-fi
-if [[ $MY_ZSH_PROFILE == "home" ]]; then
-	. "${HOME}/.dotfiles/profiles/home/.plugins"
-fi
 
+
+function _source_from_profile() {
+	local FILE="${HOME}/.dotfiles/profiles/$MY_ZSH_PROFILE/$1"
+	if [[ -f "${FILE}" ]]; then
+		. "${FILE}"
+	fi
+}
+
+_source_from_profile '.plugins'
 
 source $ZSH/oh-my-zsh.sh
 
 . "${HOME}/.dotfiles/config/.env"
 
-if [[ $MY_ZSH_PROFILE == "k8s-aws" ]]; then
-	. "${HOME}/.dotfiles/profiles/k8s-aws/.prompt"
-fi
-if [[ $MY_ZSH_PROFILE == "home" ]]; then
-	. "${HOME}/.dotfiles/profiles/home/.prompt"
-fi
-
-if [[ $MY_ZSH_PROFILE == "k8s-aws" ]]; then
-	. "${HOME}/.dotfiles/profiles/k8s-aws/.aliases"
-fi
-if [[ $MY_ZSH_PROFILE == "home" ]]; then
-	. "${HOME}/.dotfiles/profiles/home/.aliases"
-fi
+_source_from_profile '.prompt'
+_source_from_profile '.aliases'
+_source_from_profile '.env'
 
 if [[ -f "${HOME}/.localrc" ]]; then
 	. "${HOME}/.localrc"
