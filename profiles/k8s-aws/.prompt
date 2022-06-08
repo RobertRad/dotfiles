@@ -1,1 +1,1 @@
-RPS1='$(kubectx_prompt_info)'
+RPS1='AWS:$(agp) ctx:$(kubectx_prompt_info)'
