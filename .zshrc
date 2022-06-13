@@ -4,6 +4,9 @@
 # . "${HOME}/.dotfiles/.zshrc"
 
 export MY_ZSH_PROFILE=${MY_ZSH_PROFILE//[^A-Za-z0-9_-]/_}
+if [[ -z $MY_ZSH_PROFILE ]]; then
+	echo "No profile set!"
+fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
@@ -79,9 +82,10 @@ HIST_STAMPS="yyyy-mm-dd"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+dir=$(dirname $0)
 
 function _source_from_profile() {
-	local FILE="${HOME}/.dotfiles/profiles/$MY_ZSH_PROFILE/$1"
+	local FILE="${dir}/profiles/$MY_ZSH_PROFILE/$1"
 	if [[ -f "${FILE}" ]]; then
 		. "${FILE}"
 	fi
@@ -97,7 +101,7 @@ _source_from_profile '.plugins'
 
 source $ZSH/oh-my-zsh.sh
 
-. "${HOME}/.dotfiles/config/.env"
+. "${dir}/config/.env"
 
 _source_from_profile '.prompt'
 _source_from_profile '.aliases'

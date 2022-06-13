@@ -1,0 +1,7 @@
+export SUPER_MAGIC_API_KEY="API_KEY_123"
+
+# Be sure to choose the same name as in the kubectx_mapping, so matching magic works
+asp test
+
+kubectx_mapping[arn:aws:eks:...test]="test"
+kubectx_mapping[arn:aws:eks:...live]="live"
