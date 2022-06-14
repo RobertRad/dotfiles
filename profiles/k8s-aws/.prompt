@@ -31,4 +31,41 @@ function ctx() {
         fi
     fi
 }
-RPS1='$(ctx_prompt)'
+
+jq --version &> /dev/null
+if [[ $? -ne 0  ]]; then
+    echo "Be sure to install 'jq'"
+fi
+
+function aws_sso_login_time() {
+    local sso_cache_file=""
+    for full_filename in ${HOME}/.aws/sso/cache/*; do
+        filename=$(basename $full_filename)
+        if [[ $filename =~ "^[0-9a-z]*\.json$" ]]; then
+            sso_cache_file=$full_filename
+        fi
+    done
+    if [[ -z $sso_cache_file ]]; then
+        echo "❌ Not logged in"
+        return
+    fi
+    content=$(cat $sso_cache_file)
+    exp=$(echo $content | jq -r '.expiresAt')
+    exp_unixtime=$(echo exp | date --date="$exp" +%s)
+    now=$(date +%s)
+    diff=$(($exp_unixtime - $now))
+    if [[ $diff -lt 0 ]]; then
+        echo "❌ Outdated"
+        return
+    fi
+    hours=$(($diff / 60 / 60))
+    minutes=$((($diff / 60) % 60))
+    seconds=$(($diff % 60))
+    if [[ $hours -ge 1 || $minutes -ge 15 ]]; then
+        echo "✔️"
+        return
+    fi
+    echo "🟡 ${(l:2::0:)minutes}m:${(l:2::0:)seconds}s left"
+}
+
+RPS1='$(ctx_prompt) $(aws_sso_login_time)'
