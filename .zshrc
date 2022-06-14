@@ -103,6 +103,7 @@ source $ZSH/oh-my-zsh.sh
 
 . "${dir}/config/.env"
 
+declare -A kubectx_color
 _source_from_profile '.prompt'
 _source_from_profile '.aliases'
 _source_from_profile '.env'

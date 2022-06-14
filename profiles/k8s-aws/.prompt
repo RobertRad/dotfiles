@@ -1,1 +1,34 @@
-RPS1='AWS:$(agp) ctx:$(kubectx_prompt_info)'
+function ctx_prompt() {
+    local aws=$(agp)
+    local kube=$(kubectx_prompt_info)
+    if [[ ${aws} == ${kube} ]]; then
+        echo "[%{$kubectx_color[$aws]%}$aws%{$reset_color%}]"
+    else
+        echo "AWS:%{$fg[red]%}${aws}%{$reset_color%} kubectx:%{$fg[red]%}${kube}%{$reset_color%}"
+    fi
+}
+
+function ctx() {
+    if [[ -z "$1" ]]; then
+        echo "AWS: $(agp)"
+        echo "kubectx: $(kubectx_prompt_info)"
+        if [[ $(agp) != $(kubectx_prompt_info) ]]; then
+            echo "$fg[red]Mismatch!"
+        fi
+    else
+        local cluster_identifier=""
+        for key value in ${(kv)kubectx_mapping}; do
+            if [[ $value == $1 ]]; then
+                cluster_identifier=$key
+            fi
+        done
+        if [[ -z $cluster_identifier ]]; then
+            echo "Cluster '$1' not found"
+        else
+            echo "Using cluster $1: $cluster_identifier"
+            kubectx $cluster_identifier > /dev/null
+            asp $1
+        fi
+    fi
+}
+RPS1='$(ctx_prompt)'
