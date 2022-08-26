@@ -1,5 +1,5 @@
 #!/bin/sh
-export VERSION="v3.9.0"
+export VERSION="v3.9.4"
 
 echo "Downloading helm"
 curl -L "https://get.helm.sh/helm-${VERSION}-linux-amd64.tar.gz" -o helm.tar.gz
