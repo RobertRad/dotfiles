@@ -1,2 +1,2 @@
 export NVM_LAZY_LOAD=true
-plugins=(git encode64 urltools zsh-nvm aws kubectx helm)
+plugins=(git encode64 urltools zsh-nvm aws kubectx helm autoswitch_virtualenv)

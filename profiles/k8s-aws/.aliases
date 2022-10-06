@@ -2,4 +2,3 @@ alias tf=terraform
 alias k=kubectl
 alias kgp=kubectl get pods
 alias p3=python3
-alias python=python3

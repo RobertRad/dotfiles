@@ -8,4 +8,6 @@ pip3 install virtualenv
 python3 --version
 pip3 --version
 
+sudo ln -s /usr/bin/python3 /usr/bin/python
+
 echo "Done"
