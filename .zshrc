@@ -1,11 +1,9 @@
 # Your ".zshrc" should look like this:
-# export MY_ZSH_PROFILE="home"
-# export MY_ZSH_PROFILE="k8s-aws"
-# . "${HOME}/.dotfiles/.zshrc"
+# export MY_ZSH_PROFILES="(basic nvm python)""
+# . "${HOME}/dotfiles/.zshrc"
 
-export MY_ZSH_PROFILE=${MY_ZSH_PROFILE//[^A-Za-z0-9_-]/_}
-if [[ -z $MY_ZSH_PROFILE ]]; then
-	echo "No profile set!"
+if [[ -z $MY_ZSH_PROFILES ]]; then
+	echo "No profiles set!"
 fi
 
 # If you come from bash you might have to change your $PATH.
@@ -85,7 +83,7 @@ HIST_STAMPS="yyyy-mm-dd"
 dir=$(dirname $0)
 
 function _source_from_profile() {
-	local FILE="${dir}/profiles/$MY_ZSH_PROFILE/$1"
+	local FILE="${dir}/profiles/$1/$2"
 	if [[ -f "${FILE}" ]]; then
 		. "${FILE}"
 	fi
@@ -97,16 +95,21 @@ function _source_from_local() {
 		. "${FILE}"
 	fi
 }
-_source_from_profile '.plugins'
+for profile in "${MY_ZSH_PROFILES[@]}"; do
+	_source_from_profile $profile '.plugins'
+done
 
+echo "plugins: $plugins"
 source $ZSH/oh-my-zsh.sh
 
 . "${dir}/config/.env"
 
 declare -A kubectx_color
-_source_from_profile '.prompt'
-_source_from_profile '.aliases'
-_source_from_profile '.env'
+for profile in "${MY_ZSH_PROFILES[@]}"; do
+	_source_from_profile $profile '.prompt'
+	_source_from_profile $profile '.aliases'
+	_source_from_profile $profile '.env'
+done
 
 _source_from_local 'prompt'
 _source_from_local 'aliases'

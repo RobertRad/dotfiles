@@ -1,1 +1,2 @@
-export SUPER_MAGIC_API_KEY="API_KEY_123"
+# Template from k8s-aws
+#export SUPER_MAGIC_API_KEY="API_KEY_123"

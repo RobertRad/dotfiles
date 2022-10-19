@@ -1,2 +1,0 @@
-export NVM_LAZY_LOAD=true
-plugins=(git encode64 urltools zsh-nvm autoswitch_virtualenv)
