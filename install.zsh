@@ -95,9 +95,9 @@ function _copy_from_template_folder() {
 }
 
 for profile ("$selected_profiles[@]"); do
-	_copy_from_template_folder $profile '.localzsh_prompt'
 	_copy_from_template_folder $profile '.localzsh_aliases'
 	_copy_from_template_folder $profile '.localzsh_env'
+	_copy_from_template_folder $profile '.localzsh_prompt'
 	postinstall="${dir}/profiles/${profile}/postinstall.txt"
 	if [[ -e $postinstall ]]; then
 		cat $postinstall

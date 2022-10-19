@@ -1,0 +1,1 @@
+This is a message, which is shown, after the template is installed
