@@ -99,7 +99,6 @@ for profile in "${MY_ZSH_PROFILES[@]}"; do
 	_source_from_profile $profile '.plugins'
 done
 
-echo "plugins: $plugins"
 source $ZSH/oh-my-zsh.sh
 
 . "${dir}/config/.env"
