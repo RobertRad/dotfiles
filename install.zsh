@@ -77,7 +77,7 @@ if [[ -e "${HOME}/.zshrc" ]]; then
 	mv ${HOME}/.zshrc ${HOME}/.zshrc_backup
 fi
 cat > "${HOME}/.zshrc" <<- EOF
-	export MY_ZSH_PROFILES="(${selected_profiles})"
+	export MY_ZSH_PROFILES=(${selected_profiles})
 	. "${dir}/.zshrc"
 EOF
 
