@@ -1,3 +1,4 @@
 Python:
 To install the autoswitch_virtualenv plugin, execute the following command:
 git clone "https://github.com/MichaelAquilina/zsh-autoswitch-virtualenv.git" "$ZSH_CUSTOM/plugins/autoswitch_virtualenv"
+Be sure to have "python" in PATH. "python3" is not sufficient!
