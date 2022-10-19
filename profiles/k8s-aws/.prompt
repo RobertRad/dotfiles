@@ -39,6 +39,10 @@ fi
 
 function aws_sso_login_time() {
     local sso_cache_file=""
+    if [[ ! -d ${HOME}/.aws/sso/cache ]]; then
+        echo "❌ SSO not configured"
+        return
+    fi
     for full_filename in ${HOME}/.aws/sso/cache/*; do
         filename=$(basename $full_filename)
         if [[ $filename =~ "^[0-9a-z]*\.json$" ]]; then
