@@ -98,9 +98,17 @@ for profile ("$selected_profiles[@]"); do
 	_copy_from_template_folder $profile '.localzsh_aliases'
 	_copy_from_template_folder $profile '.localzsh_env'
 	_copy_from_template_folder $profile '.localzsh_prompt'
-	postinstall="${dir}/profiles/${profile}/postinstall.txt"
+	postinstall_msg="${dir}/profiles/${profile}/postinstall.txt"
+	if [[ -e $postinstall_msg ]]; then
+		cat $postinstall_msg
+		echo ""
+	fi
+	postinstall="${dir}/profiles/${profile}/postinstall.zsh"
 	if [[ -e $postinstall ]]; then
-		cat $postinstall
+		echo "$profile:"
+		echo "Executing postinstall"
+		. $postinstall
+		echo ""
 	fi
 done
 
