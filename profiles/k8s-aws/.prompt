@@ -1,3 +1,8 @@
+# TODO - This could be made configurable
+if [ $(kubectx_prompt_info) != "docker-desktop" ]; then
+    asp $(kubectx_prompt_info)
+fi
+
 function ctx_prompt() {
     local aws=$(agp)
     local kube=$(kubectx_prompt_info)
@@ -16,19 +21,9 @@ function ctx() {
             echo "$fg[red]Mismatch!"
         fi
     else
-        local cluster_identifier=""
-        for key value in ${(kv)kubectx_mapping}; do
-            if [[ $value == $1 ]]; then
-                cluster_identifier=$key
-            fi
-        done
-        if [[ -z $cluster_identifier ]]; then
-            echo "Cluster '$1' not found"
-        else
-            echo "Using cluster $1: $cluster_identifier"
-            kubectx $cluster_identifier > /dev/null
-            asp $1
-        fi
+        echo "Using cluster: $1"
+        kubectx $1 > /dev/null
+        asp $1
     fi
 }
 

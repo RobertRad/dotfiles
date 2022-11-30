@@ -1,12 +1,5 @@
-# Template from k8s-aws
-# Be sure to choose the same name in the kubectx_mapping and in the aws profiles, so matching magic works!
-#kubectx_mapping[arn:aws:eks:...test]="test"
-#kubectx_mapping[arn:aws:eks:...live]="live"
-
 # Optional: Assign colors to the the contexts
 # Use $fg for named colors: black, red, green, yellow, blue, magenta, cyan & white
 # Use $FG for number colors. Type "spectrum_ls" in zsh (with Oh my ZSH) to see them. Be sure to use 3 digits (leading zeros)
 #kubectx_color[test]="$fg[green]"
 #kubectx_color[live]="$FG[208]"
-
-#asp $(kubectx_prompt_info)
