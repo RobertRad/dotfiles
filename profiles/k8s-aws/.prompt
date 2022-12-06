@@ -33,23 +33,26 @@ if [[ $? -ne 0  ]]; then
 fi
 
 function aws_sso_login_time() {
-    local sso_cache_file=""
+    local sso_cache_file_content=""
     if [[ ! -d ${HOME}/.aws/sso/cache ]]; then
         echo "❌ SSO not configured"
         return
     fi
-    for full_filename in ${HOME}/.aws/sso/cache/*; do
+    for full_filename in ${HOME}/.aws/sso/cache/*(N.); do
         filename=$(basename $full_filename)
         if [[ $filename =~ "^[0-9a-z]*\.json$" ]]; then
-            sso_cache_file=$full_filename
+            content=$(cat $full_filename)
+            startUrl=$(echo $content | jq -r '.startUrl')
+            if [[ $startUrl != "null" ]]; then
+                sso_cache_file_content=$content
+            fi
         fi
     done
-    if [[ -z $sso_cache_file ]]; then
+    if [[ -z $sso_cache_file_content ]]; then
         echo "❌ Not logged in"
         return
     fi
-    content=$(cat $sso_cache_file)
-    exp=$(echo $content | jq -r '.expiresAt')
+    exp=$(echo $sso_cache_file_content | jq -r '.expiresAt')
     exp_unixtime=$(echo exp | date --date="$exp" +%s)
     now=$(date +%s)
     diff=$(($exp_unixtime - $now))
