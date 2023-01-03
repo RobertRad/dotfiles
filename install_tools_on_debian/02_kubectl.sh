@@ -1,5 +1,5 @@
 #!/bin/sh
-export KUBECTL_VERSION="v1.23.9"
+export KUBECTL_VERSION="v1.24.9"
 export KUBE_TOOLS_VERSION="v0.9.4"
 
 echo "Download kubectl"
