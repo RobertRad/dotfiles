@@ -1,6 +1,6 @@
 #!/bin/bash
-export VERSION="18.0.1.1_2"
-export OPENJ9_VERSION="0.32.0"
+export VERSION="17.0.5_8"
+export OPENJ9_VERSION="0.35.0"
 
 export MAIN_VERSION=${VERSION:0:2}
 export URL_VERSION=${VERSION/_/%2B}
