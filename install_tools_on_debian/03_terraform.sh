@@ -1,5 +1,5 @@
 #!/bin/sh
-export VERSION="1.2.7"
+export VERSION="1.3.7"
 
 echo "Downloading terraform"
 curl -L "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" -o terraform.zip
