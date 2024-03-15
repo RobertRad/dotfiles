@@ -1,0 +1,3 @@
+npm (nvm):
+To install the zsh-better-npm-completion plugin, execute the following command:
+git clone "https://github.com/lukechilds/zsh-better-npm-completion" "$ZSH_CUSTOM/plugins/zsh-better-npm-completion"

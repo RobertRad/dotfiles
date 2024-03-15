@@ -1,2 +1,2 @@
 export NVM_LAZY_LOAD=true
-plugins=($plugins zsh-nvm)
+plugins=($plugins zsh-nvm zsh-better-npm-completion)
